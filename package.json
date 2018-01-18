@@ -1,0 +1,31 @@
+{
+  "name": "test-http-get",
+  "version": "0.0.0",
+  "description": "Test if a http request succeedes or not.",
+  "main": "index.js",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "hyperquest": "^2.1.2",
+    "is-redirect": "^1.0.0"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3",
+    "tape": "^4.8.0"
+  },
+  "homepage": "https://github.com/ralphtheninja/test-http-get",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ralphtheninja/test-http-get.git"
+  },
+  "scripts": {
+    "test": "tape test && standard"
+  },
+  "author": "Lars-Magnus Skog <ralphtheninja@riseup.net>",
+  "keywords": [
+    "test",
+    "http",
+    "get",
+    "request"
+  ],
+  "license": "MIT"
+}
