@@ -1,4 +1,5 @@
 const tape = require('tape')
+const http = require('http')
 const test = require('..')
 
 tape('rvagg/node-levelup', function (t) {
@@ -15,4 +16,39 @@ tape('non existent github repository - 404', function (t) {
     t.is(exists, false, 'should not exist')
     t.end()
   })
+})
+
+tape('missing location on redirect response', function (t) {
+  const port = 12345
+  const server = http.createServer((req, res) => {
+    console.log('got request')
+    res.writeHead(301)
+    res.end()
+  })
+  server.listen(port, () => {
+    console.log('server listening')
+    test(`http://localhost:${port}`, (err, exists) => {
+      t.equal(err.message, 'missing location on redirect response', 'correct error')
+      t.is(exists, undefined, 'existence is undefined')
+      t.end()
+    })
+  }).unref()
+})
+
+tape('too many redirects', function (t) {
+  const port = 23456
+  const location = `http://localhost:${port}`
+  const server = http.createServer((req, res) => {
+    console.log('got request')
+    res.writeHead(301, { location })
+    res.end()
+  })
+  server.listen(port, () => {
+    console.log('server listening')
+    test(location, (err, exists) => {
+      t.equal(err.message, 'too many redirect attempts, max is 5', 'correct error')
+      t.is(exists, undefined, 'existence is undefined')
+      t.end()
+    })
+  }).unref()
 })

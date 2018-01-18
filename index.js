@@ -26,7 +26,7 @@ const test = (url, cb) => {
         return doIt(location, cb)
       }
 
-      cb(new Error('Too many redirect attempts. Max is', maxRedirects))
+      cb(new Error('too many redirect attempts, max is ' + maxRedirects))
     })
   }
 
