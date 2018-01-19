@@ -1,14 +1,17 @@
 const hyperquest = require('hyperquest')
 const isRedirect = require('is-redirect')
+const once = require('once')
 const debug = require('debug')('test-http-get')
 const maxRedirects = 5
 
 const test = (url, cb) => {
-  debug('making HEAD request to', url)
   let redirectAttempts = 0
 
   const doIt = (url, cb) => {
-    hyperquest(url, { method: 'HEAD' }).on('response', res => {
+    debug('making HEAD request to', url)
+    const req = hyperquest(url, { method: 'HEAD' })
+
+    req.on('response', res => {
       const code = res.statusCode
       debug('HEAD status code', code)
 
@@ -28,9 +31,13 @@ const test = (url, cb) => {
 
       cb(new Error(`too many redirect attempts, max is ${maxRedirects}`))
     })
+
+    req.on('error', err => {
+      cb(new Error(`request to ${url} failed`))
+    })
   }
 
-  doIt(url, cb)
+  doIt(url, once(cb))
 }
 
 module.exports = test
