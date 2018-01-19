@@ -22,11 +22,11 @@ const test = (url, cb) => {
       }
 
       if (++redirectAttempts < 5) {
-        debug('redirecting to', location, 'attempt', redirectAttempts)
+        debug(`redirecting ${url} -> ${location} (${redirectAttempts})`)
         return doIt(location, cb)
       }
 
-      cb(new Error('too many redirect attempts, max is ' + maxRedirects))
+      cb(new Error(`too many redirect attempts, max is ${maxRedirects}`))
     })
   }
 
