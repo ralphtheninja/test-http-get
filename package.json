@@ -28,5 +28,8 @@
     "get",
     "request"
   ],
+  "engines": {
+    "node": ">=6"
+  },
   "license": "MIT"
 }
