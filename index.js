@@ -1,7 +1,7 @@
 const hyperquest = require('hyperquest')
 const isRedirect = require('is-redirect')
 const once = require('once')
-const { URL } = require('url')
+const URL = require('url')
 const debug = require('debug')('test-http-get')
 const maxRedirects = 5
 
@@ -26,7 +26,8 @@ const test = (url, cb) => {
       }
 
       if (location.startsWith('/')) {
-        location = new URL(url).origin + location
+        const parsedUrl = URL.parse(url)
+        location = parsedUrl.href + location.slice(1)
       }
 
       if (++redirectAttempts < 5) {
