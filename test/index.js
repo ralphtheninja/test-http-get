@@ -52,3 +52,11 @@ tape('too many redirects', function (t) {
     })
   }).unref()
 })
+
+tape('requesting bad url errors', function (t) {
+  test('/whatever', (err, exists) => {
+    t.equal(err.message, 'request to /whatever failed', 'correct error')
+    t.is(exists, undefined, 'existence is undefined')
+    t.end()
+  })
+})
