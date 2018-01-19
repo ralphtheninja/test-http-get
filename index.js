@@ -1,6 +1,7 @@
 const hyperquest = require('hyperquest')
 const isRedirect = require('is-redirect')
 const once = require('once')
+const { URL } = require('url')
 const debug = require('debug')('test-http-get')
 const maxRedirects = 5
 
@@ -19,9 +20,13 @@ const test = (url, cb) => {
         return cb(null, code < 300)
       }
 
-      const location = res.headers.location
+      let location = res.headers.location
       if (typeof location !== 'string') {
         return cb(new Error('missing location on redirect response'))
+      }
+
+      if (location.startsWith('/')) {
+        location = new URL(url).origin + location
       }
 
       if (++redirectAttempts < 5) {
