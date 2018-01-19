@@ -58,17 +58,18 @@ tape('requesting bad url errors', function (t) {
 })
 
 tape('redirect location starting with slash should use same origin', function (t) {
-  t.plan(3)
+  t.plan(4)
   const port = 11111
-  const location = `http://localhost:${port}`
+  const location = `http://localhost:${port}/foo`
   let first = true
   const server = http.createServer((req, res) => {
     if (first) {
+      t.equal(req.url, '/foo')
       res.writeHead(301, { location: '/whatever' })
       first = false
     } else {
+      t.equal(req.url, '/whatever')
       res.writeHead(200)
-      t.ok(true)
     }
     res.end()
   })
