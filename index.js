@@ -32,9 +32,7 @@ const test = (url, cb) => {
       cb(new Error(`too many redirect attempts, max is ${maxRedirects}`))
     })
 
-    req.on('error', () => {
-      cb(new Error(`request to ${url} failed`))
-    })
+    req.on('error', () => cb(new Error(`request to ${url} failed`)))
   }
 
   doIt(url, once(cb))
