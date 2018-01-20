@@ -34,7 +34,7 @@ const test = (url, cb) => {
         }))
       }
 
-      if (++redirectAttempts < 5) {
+      if (++redirectAttempts < maxRedirects) {
         debug(`redirecting ${url} -> ${location} (${redirectAttempts})`)
         return doIt(location, cb)
       }
