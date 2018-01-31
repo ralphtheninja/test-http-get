@@ -9,13 +9,12 @@ const maxRedirects = 5
 const test = (url, cb) => {
   let redirectAttempts = 0
 
-  const doIt = (url, cb) => {
-    debug('making HEAD request to', url)
-    const req = hyperquest(url, { method: 'HEAD' })
+  const doIt = (url, cb, method = 'HEAD') => {
+    const req = hyperquest(url, { method })
 
     req.on('response', res => {
       const code = res.statusCode
-      debug('HEAD status code', code)
+      debug(`${method} ${code} ${url}`)
 
       if (!isRedirect(code)) {
         return cb(null, code < 300)
