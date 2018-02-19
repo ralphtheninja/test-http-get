@@ -10,7 +10,7 @@
     "once": "^1.4.0"
   },
   "devDependencies": {
-    "standard": "^10.0.3",
+    "standard": "^11.0.0",
     "tape": "^4.8.0"
   },
   "homepage": "https://github.com/ralphtheninja/test-http-get",
