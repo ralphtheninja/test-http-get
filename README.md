@@ -2,6 +2,7 @@
 
 > Test if a http request succeedes or not.
 
+[![npm](https://img.shields.io/npm/v/test-http-get.svg)](https://www.npmjs.com/package/test-http-get)
 ![Node version](https://img.shields.io/node/v/test-http-get.svg)
 [![Build Status](https://travis-ci.org/ralphtheninja/test-http-get.svg?branch=master)](https://travis-ci.org/ralphtheninja/test-http-get)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
