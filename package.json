@@ -1,6 +1,6 @@
 {
   "name": "test-http-get",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Test if a http request succeedes or not.",
   "main": "index.js",
   "dependencies": {
